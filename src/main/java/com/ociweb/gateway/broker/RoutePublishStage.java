@@ -1,5 +1,7 @@
 package com.ociweb.gateway.broker;
 
+import java.util.Map;
+
 import com.hazelcast.config.Config;
 import com.hazelcast.config.ReliableTopicConfig;
 import com.hazelcast.config.RingbufferConfig;
@@ -50,7 +52,9 @@ import com.ociweb.pronghorn.stage.scheduling.GraphManager;
 
 public class RoutePublishStage extends PronghornStage {
 
+    private static final String RETAINED_MESSAGES = "retainedMessages";
     private HazelcastInstance instance;
+    private Map<byte[],byte[]> retainedMessages;
 
     protected RoutePublishStage(GraphManager graphManager, RingBuffer input, RingBuffer output) {
         super(graphManager, input, output);
@@ -69,10 +73,16 @@ public class RoutePublishStage extends PronghornStage {
 
         instance = Hazelcast.newHazelcastInstance(config);        
         
+        retainedMessages = instance.getMap(RETAINED_MESSAGES);
+        
     }
     
     @Override
     public void run() {
+        
+        //as publisher if messsage is retained write it here
+        // retainedMessages  //TODO: add this feature last after we fix the routing.
+        
         
         //take incomming messages and publish them on topics.
         //if topic is new must pull new PathIDs

@@ -39,6 +39,10 @@ public class RouteSubscribeStage extends PronghornStage {
     @Override
     public void run() {
         
+        //as new subscriber check here first for retained messages
+        // retainedMessages //TODO: add this feature last after we fix the routing.
+        
+        
         //take incomming messages and publish them on topics.
         //if topic is new must pull new PathIDs
         //if topic is retained must set retained value
