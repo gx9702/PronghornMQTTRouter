@@ -11,7 +11,7 @@ import com.hazelcast.topic.ReliableMessageListener;
 import com.hazelcast.topic.TopicOverloadException;
 import com.hazelcast.topic.TopicOverloadPolicy;
 import com.hazelcast.topic.impl.reliable.ReliableTopicProxy;
-import com.ociweb.pronghorn.ring.RingBuffer;
+import com.ociweb.pronghorn.pipe.Pipe;
 import com.ociweb.pronghorn.stage.PronghornStage;
 import com.ociweb.pronghorn.stage.scheduling.GraphManager;
 
@@ -19,7 +19,7 @@ public class RouteSubscribeStage extends PronghornStage {
 
     private HazelcastInstance instance;
     
-    protected RouteSubscribeStage(GraphManager graphManager, RingBuffer input, RingBuffer output) {
+    protected RouteSubscribeStage(GraphManager graphManager, Pipe input, Pipe output) {
         super(graphManager, input, output);
         // TODO Auto-generated constructor stub
     }
